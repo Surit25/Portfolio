@@ -10,14 +10,21 @@
 </head>
 <body>
     <nav>
-        <div class="logo">Portfolio</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="container">
+            <div class="logo">Portfolio</div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
     <section id="home" class="hero">
@@ -30,7 +37,8 @@
     </section>
 
     <section id="about" class="about">
-        <h2>About Me</h2>
+        <div class="container">
+            <h2>About Me</h2>
         <div class="about-content">
             <div class="about-text">
                 <p>I'm a passionate developer with experience in creating beautiful and functional web applications. I love bringing ideas to life through code.</p>
@@ -53,7 +61,8 @@
     </section>
 
     <section id="projects" class="projects">
-        <h2>My Projects</h2>
+        <div class="container">
+            <h2>My Projects</h2>
         <div class="project-grid">
             <div class="project-card">
                 <img src="https://via.placeholder.com/300" alt="Project 1">
@@ -74,7 +83,8 @@
     </section>
 
     <section id="skills" class="skills">
-        <h2>Skills</h2>
+        <div class="container">
+            <h2>Skills</h2>
         <div class="skills-grid">
             <div class="skill">
                 <div class="skill-name">HTML/CSS</div>
@@ -98,17 +108,23 @@
     </section>
 
     <section id="contact" class="contact">
-        <h2>Contact Me</h2>
+        <div class="container">
+            <h2>Contact Me</h2>
         <form class="contact-form">
             <input type="text" placeholder="Name" required>
             <input type="email" placeholder="Email" required>
             <textarea placeholder="Message" required></textarea>
             <button type="submit">Send Message</button>
         </form>
+            </div>
     </section>
 
     <footer>
+        <div class="container">
         <p>&copy; 2025 Your Portfolio. All rights reserved.</p>
+    </footer>
+
+            </div>
     </footer>
 
     <script src="script.js"></script>

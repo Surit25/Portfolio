@@ -172,8 +172,82 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Mobile Menu Functionality
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+let menuOpen = false;
+
+mobileMenuBtn.addEventListener('click', () => {
+    if (!menuOpen) {
+        mobileMenuBtn.classList.add('open');
+        navLinks.classList.add('active');
+        menuOpen = true;
+    } else {
+        mobileMenuBtn.classList.remove('open');
+        navLinks.classList.remove('active');
+        menuOpen = false;
+    }
+});
+
+// Close menu when clicking a link
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenuBtn.classList.remove('open');
+        navLinks.classList.remove('active');
+        menuOpen = false;
+    });
+});
+
 // Initialize animations
 animate();
+
+// Handle device orientation change
+window.addEventListener('orientationchange', () => {
+    // Reset camera position
+    camera.position.setZ(30);
+    camera.position.setY(5);
+    camera.rotation.x = 0;
+    camera.rotation.y = 0;
+    
+    // Update renderer size
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+});
+
+// Optimize 3D effects for mobile
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+if (isMobile) {
+    // Reduce number of stars for better performance
+    scene.children.forEach(child => {
+        if (child.geometry && child.geometry.type === 'SphereGeometry' && child.geometry.parameters.radius === 0.25) {
+            scene.remove(child);
+        }
+    });
+    Array(50).fill().forEach(addStar); // Add fewer stars for mobile
+
+    // Reduce animation complexity
+    crystals.forEach(crystal => scene.remove(crystal));
+    crystals.length = 0;
+    Array(5).fill().forEach(() => {
+        const crystal = new THREE.Mesh(
+            new THREE.OctahedronGeometry(Math.random() * 2 + 1),
+            new THREE.MeshPhongMaterial({
+                color: new THREE.Color(`hsl(${Math.random() * 360}, 70%, 50%)`),
+                shininess: 100,
+                transparent: true,
+                opacity: 0.8
+            })
+        );
+        crystal.position.set(
+            (Math.random() - 0.5) * 30,
+            (Math.random() - 0.5) * 30,
+            (Math.random() - 0.5) * 30
+        );
+        crystals.push(crystal);
+        scene.add(crystal);
+    });
+}
 
 // Skill bars animation
 const skillLevels = document.querySelectorAll('.skill-level');
